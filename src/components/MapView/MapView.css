@@ -1,0 +1,6 @@
+.mapView {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  padding: 0;
+}

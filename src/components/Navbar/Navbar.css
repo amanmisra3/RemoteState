@@ -1,0 +1,64 @@
+.myNavbar {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  grid-template-rows: 100px;
+  background-color: aquamarine;
+  color: #000;
+}
+
+
+li p{
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#selectBox{
+    grid-column-start: 6;
+    grid-column-end: 8;
+    height: 50%;
+    width: 50%;
+
+    position: relative;
+    top: 20%;
+    left: 30%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+li:hover{
+    background-color: rgb(153, 69, 69);
+}
+
+li a:hover{
+    background-color: grey;
+}
+
+li a:active{
+    background-color: grey;
+}
+
+li a:visited{
+    background-color: grey;
+}
+

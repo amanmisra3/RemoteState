@@ -1,0 +1,52 @@
+.truckItemContainer {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgb(179, 31, 31);
+  /* border-bottom: 1px solid grey; */
+  /* margin-top: 20px; */
+  color: rgb(0, 0, 0);
+  width: 300px;
+  height: 80px;
+  margin: 10px;
+  position: relative;
+}
+
+#lastUpdatedTime {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  margin: 0;
+  color: rgb(65, 56, 56);
+  font-size: 14px;
+}
+
+#vehicleNumber {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  margin: 0;
+}
+
+#lastStoppedOrRunningState {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  margin: 0;
+  color: rgb(65, 56, 56);
+  font-size: 16px;
+}
+
+#speed {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  margin: 0;
+  color: rgb(65, 56, 56);
+  font-size: 12px;
+}
+
+#truckIcon{
+  font-size: 20px;
+  padding: 5px
+}
