@@ -38,7 +38,7 @@ function Display(props) {
                 case 'error':
                     return item
                 default:
-                    return null
+                    return item
             }
         })
         setFilterData(filteredData)
@@ -48,8 +48,8 @@ function Display(props) {
     return (
         <div>
             <div id='sideBySide'>
-                {filterData.length > 0 && <>
-                    <div id={props.text }><TruckList myData={filterData} truckStatusText={props.truckStatusText} /></div>
+                {<>
+                    <div id='truck'><TruckList myData={filterData} truckStatusText={props.truckStatusText} /></div>
                     <div id='map'><MapView myData={filterData} truckStatusText={props.truckStatusText} /></div>
                 </>}
 

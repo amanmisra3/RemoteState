@@ -5,6 +5,7 @@ import redMarker from '../../images/truck-2047_red.png'
 import greenMarker from '../../images/truck-2047_green.png'
 import yellowMarker from '../../images/truck-2047_yellow.png'
 import blueMarker from '../../images/truck-2047_blue.png'
+import googleMapStyles from "./GoogleMapStyles";
 
 
 function MapView(props) {
@@ -18,30 +19,30 @@ function MapView(props) {
     }, [props])
 
     useEffect(() => {
-        let updateMarker = function(){
-            if(param === 'total'){
+        let updateMarker = function () {
+            if (param === 'total') {
                 setMarkerIcon(redMarker)
             }
-            else if(param === 'running'){
-               setMarkerIcon(greenMarker)
-           }
-           else if(param === 'stopped'){
-               setMarkerIcon(blueMarker)
-           }
-           else if(param === 'idle'){
-               setMarkerIcon(yellowMarker)
-           }
-           else if(param === 'error'){
-               setMarkerIcon(redMarker)
-           }
-       }
+            else if (param === 'running') {
+                setMarkerIcon(greenMarker)
+            }
+            else if (param === 'stopped') {
+                setMarkerIcon(blueMarker)
+            }
+            else if (param === 'idle') {
+                setMarkerIcon(yellowMarker)
+            }
+            else if (param === 'error') {
+                setMarkerIcon(redMarker)
+            }
+        }
         updateMarker()
     }, [props])
 
     //GoogleMap code
     const [currentPosition] = useState({ lat: 30.9010, lng: 75.8573 });
 
-    const [selected, setSelected] = useState({});
+    const [selected, setSelected] = useState([]);
 
     const onSelect = item => {
         setSelected(item);
@@ -50,7 +51,7 @@ function MapView(props) {
     const mapStyles = {
         height: "88vh",
         width: "100%"
-    };    
+    };
 
 
     return (
@@ -64,7 +65,7 @@ function MapView(props) {
                     center={currentPosition}>
 
                     {
-                         props.myData.map(item => {
+                        props.myData.map(item => {
                             return (
                                 <Marker key={item.id}
                                     icon={markerIcon}

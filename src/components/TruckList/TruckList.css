@@ -5,6 +5,7 @@
   color: aqua;
   /* margin: 0px 1% 0 1%; */
 
-  height: 85vh;
+  height: 88vh;
   overflow: scroll;
+  overflow-x: hidden;
 }
