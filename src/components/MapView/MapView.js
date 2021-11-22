@@ -5,7 +5,6 @@ import redMarker from '../../images/truck-2047_red.png'
 import greenMarker from '../../images/truck-2047_green.png'
 import yellowMarker from '../../images/truck-2047_yellow.png'
 import blueMarker from '../../images/truck-2047_blue.png'
-import googleMapStyles from "./GoogleMapStyles";
 
 
 function MapView(props) {
@@ -13,6 +12,7 @@ function MapView(props) {
     //markers
     const [markerIcon, setMarkerIcon] = useState(redMarker)
     const [param, setParam] = useState('')
+    const apiKey = process.env.GOOGLE_MAPS_API
 
     useEffect(() => {
         setParam(props.truckStatusText)
@@ -57,7 +57,7 @@ function MapView(props) {
     return (
         <div className='mapView'>
             <LoadScript
-                googleMapsApiKey='AIzaSyBa4P64iB-m5WmAwAZX3vH90iX-5s11w4A'>
+                googleMapsApiKey={apiKey}>
 
                 <GoogleMap
                     mapContainerStyle={mapStyles}

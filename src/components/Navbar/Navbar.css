@@ -30,6 +30,11 @@ li{
     align-items: center;
 }
 
+li:hover{
+    background-color: rgb(184, 150, 150);
+    cursor: pointer;
+}
+
 #selectBox{
     grid-column-start: 6;
     grid-column-end: 8;
@@ -43,23 +48,9 @@ li{
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid black;
 }
 
-
-
-li:hover{
-    background-color: rgb(184, 150, 150);
+select{
+    border: none;
 }
-
-li a:hover{
-    background-color: grey;
-}
-
-li a:active{
-    background-color: grey;
-}
-
-li a:visited{
-    background-color: grey;
-}
-

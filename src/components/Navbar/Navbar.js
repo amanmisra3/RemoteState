@@ -71,8 +71,8 @@ function Navbar(props) {
                     <p>{errorTrucks}</p>
                 </li>
 
-                <select id='selectBox' required onChange={truckSelected}>
-                    <option value="" disabled hidden>Select your option</option>
+                <select id='selectBox' required onChange={truckSelected} defaultValue={'DEFAULT'} >
+                    <option value="DEFAULT" disabled hidden>Find Your Truck...</option>
                     {
                         myData.map((item) => (
                             <option value={item.truckNumber} key={item.id} >{item.truckNumber}</option>
