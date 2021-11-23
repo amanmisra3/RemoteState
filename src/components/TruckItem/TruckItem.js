@@ -1,41 +1,55 @@
-import React, { useState } from 'react'
+import React, { } from 'react'
 import './TruckItem.css'
 
 function TruckItem(props) {
 
-    // function timeConverter(){
-    //     var a = new Date(1637340103000);
-    //     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    //     var year = a.getFullYear();
-    //     var month = months[a.getMonth()];
-    //     var date = a.getDate();
-    //     var hour = a.getHours();
-    //     var min = a.getMinutes();
-    //     var sec = a.getSeconds();
-    //     var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    //     return time;
-    //   }
-    
-    const [truckNumber, setTruckNumber] = useState()
+    //Last Update Time Calculation
+    var flag = true
+    const lastLocationUpdate = (givenTime) => {
+        var x = new Date(givenTime)
+        var y = new Date()
+        var z = y - x
+        var seconds = Math.abs(z) / 1000;
+        var min = Math.abs(seconds) / 60
+        var lastTime
+        if (min > 60) {
+            flag = false
+            lastTime = Math.floor(min / 60)
+        }
+        else if (min < 60 && min > 1) {
+            flag = true
+            lastTime = Math.floor(min)
+        }
+        else {
+            flag = true
+            lastTime = Math.ceil(min)
+        }
+        return lastTime
+    }
 
-    const [speed, setSpeed] = useState('10KM/hr')
-    const [lastUpdatedTime, setLastUpdatedTime] = useState('22 min')
-    const [lastStoppedOrRunningState, setLastStoppedOrRunningState] = useState('Stopped')
-    const [lastStoppedOrRunningTime, setLastStoppedOrRunningTime] = useState('11 d')
+    const lastTime = lastLocationUpdate(props.myData.lastWaypoint.createTime)
 
-    React.useEffect(() => {
-        setTruckNumber(props.truckNumber)
-    }, [props])
+    //Calculate Speed
+    let truckSpeed = Math.floor(props.myData.lastWaypoint.speed)
+
+    //Calculate last Running/Stopped state
+    let lastRunningState = props.myData.lastRunningState.truckRunningState
+
+    //Calculate last Running/Stopped time
+    const lastRunningTime = lastLocationUpdate(props.myData.lastRunningState.stopStartTime)
+
 
     return (
-        <div className='truckItemContainer'>
+        <div className='truckItemContainer' id={!flag && lastTime > 4 ? 'errorTrucks' : ``}>
             <h3 id='vehicleNumber'>
-                {truckNumber}
+                {props.myData.truckNumber}
                 <i className="bi bi-truck" id='truckIcon' ></i>
             </h3>
-            <p id='lastUpdatedTime'>{lastUpdatedTime}</p>
-            <p id='lastStoppedOrRunningState'> {lastStoppedOrRunningState}  since last {lastStoppedOrRunningTime}</p>
-            <p id='speed'> {speed}</p>
+            <p id='lastUpdatedTime' style={!flag && lastTime > 4 ? { backgroundColor: 'red', color: 'white' } : {}} >{lastTime}
+                {flag ? ' min' : ' hours'}
+            </p>
+            <p id='lastStoppedOrRunningState' style={!flag && lastTime > 4 ? { backgroundColor: 'red', color: 'white' } : {}}> {lastRunningState ? 'Running' : 'Stopped'}  since last {lastRunningTime}{flag ? ' min' : ' hours'} </p>
+            <p id='speed' style={!flag && lastTime > 4 ? { backgroundColor: 'red', color: 'white' } : {}}> {truckSpeed} k/h</p>
         </div>
     )
 }

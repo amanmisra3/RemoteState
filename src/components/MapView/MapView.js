@@ -37,7 +37,7 @@ function MapView(props) {
             }
         }
         updateMarker()
-    }, [props])
+    }, [props, param])
 
     //GoogleMap code
     const [currentPosition] = useState({ lat: 30.9010, lng: 75.8573 });

@@ -11,7 +11,7 @@ function Display(props) {
 
     useEffect(() => {
         const getData = () => {
-            fetch('https://api.mystral.in/tt/mobile/logistics/searchTrucks?auth-company=PCH&companyId=33&deactihttps://api.mystral.in/tt/mobile/logistics/searchTrucks?auth-company=PCH&companyId=33&deactivated=false&key=g2qb5jvucg7j8skpu5q7ria0mu&q-expand=true&q-include=lastRunningState,lastWaypointhttps://api.mystral.in/tt/mobile/logistics/searchTrucks?auth-company=PCH&companyId=33&deactivated=false&key=g2qb5jvucg7j8skpu5q7ria0mu&q-expand=true&q-include=lastRunningState,lastWaypoint')
+            fetch('https://api.mystral.in/tt/mobile/logistics/searchTrucks?auth-company=PCH&companyId=33&deactivated=false&key=g2qb5jvucg7j8skpu5q7ria0mu&q-expand=true&q-include=lastRunningState,lastWaypoint')
                 .then(function (response) {
                     return response.json();
                 })
@@ -24,6 +24,30 @@ function Display(props) {
         setParam(props.truckStatusText)
     }, [props])
 
+    var flag = true
+    const lastLocationUpdate = (givenTime) => {
+        var x = new Date(givenTime)
+        var y = new Date()
+        var z = y - x
+        var seconds = Math.abs(z) / 1000;
+        var min = Math.abs(seconds) / 60
+        var lastTime
+        if (min > 60) {
+            flag = false
+            lastTime = Math.floor(min / 60)
+        }
+        else if (min < 60 && min > 1) {
+            flag = true
+            lastTime = Math.floor(min)
+        }
+        else {
+            flag = true
+            lastTime = Math.ceil(min)
+        }
+        return lastTime
+    }
+    
+
     useEffect(() => {
         let filteredData = myData.filter((item) => {
             switch (param) {
@@ -32,17 +56,17 @@ function Display(props) {
                 case 'running':
                     return item.lastRunningState.truckRunningState
                 case 'stopped':
-                    return !item.lastRunningState.truckRunningState
+                    return (!item.lastRunningState.truckRunningState && !item.lastWaypoint.ignitionOn)
                 case 'idle':
-                    return item
+                    return (!item.lastRunningState.truckRunningState && item.lastWaypoint.ignitionOn)
                 case 'error':
-                    return item
+                    return (lastLocationUpdate(item.lastWaypoint.createTime)>4 && !flag)
                 default:
                     return item
             }
         })
         setFilterData(filteredData)
-
+        // eslint-disable-next-line
     }, [myData, param])
 
     return (
